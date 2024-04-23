@@ -1,0 +1,98 @@
+import { atom, useRecoilState } from "recoil";
+import { CART_ITEM, TOTAL_PRICE } from "../constants/storageKEY";
+import { IProduct } from "./products";
+
+export interface ICartInfo {
+  readonly id: number;
+  readonly count: number;
+}
+
+export interface ICartItems {
+  readonly id: string;
+  readonly title: string;
+  readonly price: number;
+  readonly count: number;
+  readonly image: string;
+}
+
+export interface ICartState {
+  readonly items?: Record<string | number, ICartInfo> | {};
+}
+
+/**
+ * 카트의 상태는 localStorage 기준으로 초기화 됩니다.
+ * 카트의 상태는 새로고침해도 유지되어야 하기 때문입니다.
+ */
+export const cartState = atom<ICartState>({
+  key: "cart",
+  default: {},
+  effects: [
+    ({ setSelf, onSet }) => {
+      localStorage.getItem(CART_ITEM) && setSelf(JSON.parse(localStorage.getItem(CART_ITEM) as string));
+      onSet((value) => localStorage.setItem(CART_ITEM, JSON.stringify(value)));
+    },
+  ],
+});
+
+export const cartTotalPrice = atom<number>({
+  key: "totalPrice",
+  default: 0,
+});
+
+export const useCartTotalPrice = () => {
+  const [totalPrice, setTotalPrice] = useRecoilState(cartTotalPrice);
+
+  const setTotalPriceAndUpdateLocalStorage = (newValue: number) => {
+    localStorage.setItem(TOTAL_PRICE, JSON.stringify(newValue));
+    setTotalPrice(newValue);
+  };
+
+  return [totalPrice, setTotalPriceAndUpdateLocalStorage] as const;
+};
+/**
+ * cartList를 구현 하세요.
+ * id, image, count 등을 return합니다.
+ */
+
+// addToCart는 구현 해보세요.
+export const addToCart = (cart: ICartState, id: number) => {
+  let tempCart = cart ? { ...cart } : {};
+  if (tempCart[id]) {
+    return { ...tempCart, [id]: { id: id, count: tempCart[id].count + 1 } };
+  } else {
+    let newCartItem = { [id]: { id: id, count: 1 } };
+    let newCartList = { ...tempCart, ...newCartItem };
+    return newCartList;
+  }
+};
+
+// removeFromCart는 참고 하세요.
+export const removeFromCart = (cart: ICartState, id: string) => {
+  let tempCart = { ...cart };
+  if (tempCart[id].count === 1) {
+    delete tempCart[id];
+    return { ...tempCart };
+  } else {
+    return { ...tempCart, [id]: { id: id, count: cart[id].count - 1 } };
+  }
+};
+
+export const addCount = (cart: ICartState, id: string) => {
+  let tempCart = { ...cart };
+  return { ...tempCart, [id]: { id: id, count: cart[id].count + 1 } };
+};
+
+export const calcTotalPrice = (cart: ICartState, totalList: IProduct[]) => {
+  const tempCart = { ...cart };
+  let totalPrice = 0;
+
+  Object.keys(tempCart).forEach((id) => {
+    const item = totalList.find((IProduct) => `${IProduct.id}` === id);
+    const itemPrice = (item?.price || 0) * tempCart[id].count;
+    totalPrice += itemPrice;
+  });
+  return totalPrice;
+};
+/**
+ * 그 외에 화면을 참고하며 필요한 기능들을 구현 하세요.
+ */

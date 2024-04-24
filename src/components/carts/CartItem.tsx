@@ -51,16 +51,16 @@ const CartItem = ({ cartItem }: { cartItem: IProduct }) => {
         <div className="card-actions">
           <div className="btn-group">
             <button
-              className="btn btn-primary"
+              className="btn btn-primary rounded-r-none"
               onClick={() => {
                 removeFromCartHandler(`${cartItem.id}`);
               }}
             >
               -
             </button>
-            <button className="btn btn-ghost no-animation">{count}</button>
+            <button className="btn btn-ghost no-animation rounded-none">{count}</button>
             <button
-              className="btn btn-primary"
+              className="btn btn-primary rounded-l-none"
               onClick={() => {
                 addCountHandler(`${cartItem.id}`);
               }}

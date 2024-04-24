@@ -1,15 +1,21 @@
 import { useRecoilState, useRecoilValueLoadable } from "recoil";
 import { themeState } from "../../../store/theme";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { IProduct, productsList } from "../../../store/products";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import CONSTANTS from "../../../constants/constants";
 
 const SearchBar = (): JSX.Element => {
   const ProductsLoadable = useRecoilValueLoadable<IProduct[]>(productsList);
   const [theme, setTheme] = useRecoilState(themeState);
+
   const [searchValue, setSearchValue] = useState("");
   const [filterItems, setFilterItems] = useState<IProduct[]>([]);
   const [clickActive, setClickActive] = useState<boolean>(false);
+  const [invisible, setInvisible] = useState<boolean>(true);
+
+  const navigate = useNavigate();
+  const searchRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     let mounted = true;
@@ -33,8 +39,48 @@ const SearchBar = (): JSX.Element => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };
-  const handleClick = () => {
-    clickActive ? setClickActive(false) : setClickActive(true);
+  const clickSearchIcon = () => {
+    if (clickActive) {
+      setClickActive(false);
+      setInvisible(true);
+    } else {
+      setClickActive(true);
+      setInvisible(false);
+    }
+  };
+  const moveToProductPage = (id: number) => {
+    navigate(`/product/${id}`);
+  };
+  const goSearchList = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const $target = e.target as HTMLElement;
+    const $next = $target.nextElementSibling as HTMLElement;
+    if (CONSTANTS.KEY.ARROW_DOWN === e.key) {
+      e.preventDefault();
+      if (null === $next || null === $next.querySelector(".js-searchedItem")) return;
+      ($next.querySelector(".js-searchedItem") as HTMLButtonElement).focus();
+    } else if (CONSTANTS.KEY.ENTER === e.key) {
+      e.preventDefault();
+      $next && $next.click();
+    }
+  };
+  const changeTarget = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    const $target = e.target as HTMLElement;
+    const $next = ($target.parentElement as HTMLLIElement).nextElementSibling as HTMLElement;
+    if (CONSTANTS.KEY.ARROW_UP === e.key) {
+      e.preventDefault();
+      const $prev = ($target.parentElement as HTMLLIElement).previousElementSibling as HTMLElement;
+      if (null === $prev || null === $prev.querySelector(".js-searchedItem")) {
+        searchRef?.current?.focus();
+      }
+      ($prev?.querySelector(".js-searchedItem") as HTMLButtonElement)?.focus();
+    } else if (CONSTANTS.KEY.ARROW_DOWN === e.key) {
+      e.preventDefault();
+      if (null === $next || null === $next.querySelector(".js-searchedItem")) return;
+      ($next.querySelector(".js-searchedItem") as HTMLButtonElement).focus();
+    } else if (CONSTANTS.KEY.ENTER === e.key) {
+      e.preventDefault();
+      $target && $target.click();
+    }
   };
 
   return (
@@ -43,7 +89,7 @@ const SearchBar = (): JSX.Element => {
         <button
           type="button"
           className="flex sm:hidden w-10 sm:w-auto mx-0 px-0 sm:mx-2 sm:px-2 btn btn-ghost js-search"
-          onClick={() => handleClick()}
+          onClick={() => clickSearchIcon()}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -69,9 +115,11 @@ const SearchBar = (): JSX.Element => {
             clickActive ? "translate-y-full !opacity-100" : null
           }`}
           value={searchValue}
-          onChange={handleChange}
+          onChange={(e) => handleChange(e)}
+          onKeyDown={goSearchList}
+          ref={searchRef}
         />
-        {searchValue.length > 0 && clickActive && (
+        {(searchValue.length > 0 || !invisible) && (
           <ul
             className={`!fixed left-0 sm:!absolute sm:top-14 menu flex-nowrap dropdown-content w-full sm:w-64 max-h-96 shadow text-base-content overflow-y-auto overflow-x-hidden ${
               theme === "light" ? "bg-white" : "bg-gray-600"
@@ -80,13 +128,16 @@ const SearchBar = (): JSX.Element => {
             {filterItems.map((IProduct) => {
               return (
                 <li key={IProduct.id}>
-                  <Link to={`/product/${IProduct.id}`}>
-                    <button type="button" className="text-left js-searchedItem">
-                      <span className={`${theme === "light" ? "text-gray-600" : "text-white"} line-clamp-2`}>
-                        {IProduct.title}
-                      </span>
-                    </button>
-                  </Link>
+                  <button
+                    type="button"
+                    className="text-left js-searchedItem"
+                    onClick={() => moveToProductPage(IProduct.id)}
+                    onKeyDown={changeTarget}
+                  >
+                    <span className={`${theme === "light" ? "text-gray-600" : "text-white"} line-clamp-2`}>
+                      {IProduct.title}
+                    </span>
+                  </button>
                 </li>
               );
             })}

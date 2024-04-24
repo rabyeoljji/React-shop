@@ -1,9 +1,9 @@
 import ProductsView from "../components/products/ProductsView";
 
-const Products = ({ id }: { id: number }) => {
+const Products = () => {
   return (
     <>
-      <ProductsView id={id} />
+      <ProductsView />
     </>
   );
 };

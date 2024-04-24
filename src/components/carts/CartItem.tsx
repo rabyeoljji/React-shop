@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
-import { IProduct, productsList } from "../../store/products";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { ICartState, addCount, calcTotalPrice, cartState, removeFromCart, useCartTotalPrice } from "../../store/cart";
+import { IProduct } from "../../store/products";
+import { useRecoilState } from "recoil";
+import { ICartState, addCount, calcTotalPrice, cartState, removeFromCart } from "../../store/cart";
 import { useEffect } from "react";
+import useCartTotalPrice from "../../CustomHook/useCartTotalPrice";
+import useProductsLoadable from "../../CustomHook/useProductsLoadable";
 
 const CartItem = ({ cartItem }: { cartItem: IProduct }) => {
   const cartID = cartItem.id;
 
-  const totalList = useRecoilValue(productsList);
+  const productsLists = useProductsLoadable();
   const [cart, setCart] = useRecoilState<ICartState>(cartState);
   const [totalPrice, setTotalPriceAndUpdateLocalStorage] = useCartTotalPrice();
 
@@ -15,7 +17,7 @@ const CartItem = ({ cartItem }: { cartItem: IProduct }) => {
   const itemPrice = cartItem.price * count;
 
   useEffect(() => {
-    setTotalPriceAndUpdateLocalStorage(calcTotalPrice(cart, totalList));
+    setTotalPriceAndUpdateLocalStorage(calcTotalPrice(cart, productsLists));
   }, [cart]);
 
   const removeFromCartHandler = (id: string) => {

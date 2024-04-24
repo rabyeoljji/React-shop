@@ -42,6 +42,7 @@
 
 버튼으로 테마가 토글되는 기능을 구현하는데 local storage 상태를 지우고 새로고침을 하면 토글버튼 아이콘도 보이지 않는 현상을 해결하기 위해 많은 방법을 시도해봤다. recoil상태에 effect도 넣어보고 조건부 렌더링 코드에 조건 추가도 많이 해봤는데 모두 해결이 안돼서 고민하던 중, 예시 페이지에서 아이콘이 어떻게 작동하는 지를 더 구체적으로 살펴보니 input checkbox 타입이라 checked 여부에 따라 아이콘이 변경되도록 스타일링되어있다는 것을 알게 되었다. 그래서 checked 속성을 이용해 코드를 수정하니 해결됐다
 
+Q.
 질문1: daisyui와 tailwind 라이브러리를 이용해 css를 해보려고 했는데 어떤 요소들은 클래스에 dark: 를 붙여서 다크모드에서 자연스럽게 해당 스타일이 적용이 됐는데 어떤 요소는 적용이 되지 않아서 따로 state를 조건으로 클래스이름을 붙여주었습니다
 그러다보니 코드가 너무 깔끔하지가 않고 반복되는 부분도 생기고 그러더라고요ㅠㅠ 원인을 찾지를 못했는데 혹시 왜 그런 걸까요..?
 
@@ -71,6 +72,10 @@ if (!cart || cart[cartID] === undefined) {
 - Search Bar 컴포넌트를 이용해 구현했는데
   Warning: Can't perform a React state update on a component that hasn't mounted yet. This indicates that you have a side-effect in your render function that asynchronously later calls tries to update the component. Move this work to useEffect instead.
   이런 오류가 발생했다. 어느 부분이 문제인지 아직 파악을 못했다ㅠㅠ
+
+  -> 멘토님께서 말씀해주신대로 productsList를 사용하는 모든 컴포넌트의 코드를 Loadable을 이용해 data가 불러와졌을 때 list를 사용하는 것으로 수정했더니 해결됐다.
+
+  - Route를 이용하는 부분에서 모든 페이지를 하나하나 route로 만들 필요가 없이 useParams를 이용해 개별페이지를 구성할 수 있다는 것을 알게되었다!
 
 ## Vercel
 

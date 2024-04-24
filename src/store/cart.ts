@@ -39,16 +39,6 @@ export const cartTotalPrice = atom<number>({
   default: 0,
 });
 
-export const useCartTotalPrice = () => {
-  const [totalPrice, setTotalPrice] = useRecoilState(cartTotalPrice);
-
-  const setTotalPriceAndUpdateLocalStorage = (newValue: number) => {
-    localStorage.setItem(TOTAL_PRICE, JSON.stringify(newValue));
-    setTotalPrice(newValue);
-  };
-
-  return [totalPrice, setTotalPriceAndUpdateLocalStorage] as const;
-};
 /**
  * cartList를 구현 하세요.
  * id, image, count 등을 return합니다.

@@ -1,27 +1,30 @@
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { Category } from "../../constants/category";
 import BreadCrumb from "../common/Breadcrumb";
-import { productsList } from "../../store/products";
-import { Link } from "react-router-dom";
-import { ICartState, addToCart, calcTotalPrice, cartState, useCartTotalPrice } from "../../store/cart";
+import { Link, useParams } from "react-router-dom";
+import { ICartState, addToCart, calcTotalPrice, cartState } from "../../store/cart";
 import ProductsViewLoad from "./ProductsViewLoad";
 import Rating from "../common/Rating";
 import { useEffect } from "react";
+import useProductsLoadable from "../../CustomHook/useProductsLoadable";
+import useCartTotalPrice from "../../CustomHook/useCartTotalPrice";
 
-const ProductsView = ({ id }: { id: number }) => {
+const ProductsView = () => {
+  const { id } = useParams();
+  const id_Num = Number(id);
   const [cart, setCart] = useRecoilState<ICartState>(cartState);
   const [totalPrice, setTotalPriceAndUpdateLocalStorage] = useCartTotalPrice();
-  const totalList = useRecoilValue(productsList);
+  const productsLists = useProductsLoadable();
 
-  const Item = totalList.find((IProduct) => {
-    return IProduct.id === id;
+  const Item = productsLists.find((IProduct) => {
+    return IProduct.id === id_Num;
   });
   const categoryStr = Item ? Item.category : "error : 제품을 찾을 수 없습니다";
   const CATEGORY = Category[categoryStr];
   const COUNT = Item?.rating.count ? Item.rating.count : 0;
 
   useEffect(() => {
-    setTotalPriceAndUpdateLocalStorage(calcTotalPrice(cart, totalList));
+    setTotalPriceAndUpdateLocalStorage(calcTotalPrice(cart, productsLists));
   }, [cart]);
 
   const addCart = (id: number) => {
@@ -48,7 +51,7 @@ const ProductsView = ({ id }: { id: number }) => {
               <Rating rate={Item.rating.rate} count={Item.rating.count} />
               <p className="mt-2 mb-4 text-3xl">${Item?.price}</p>
               <div className="card-actions">
-                <button className="btn btn-primary" onClick={() => addCart(id)}>
+                <button className="btn btn-primary" onClick={() => addCart(id_Num)}>
                   장바구니에 담기
                 </button>
                 <Link to={"/cart"} className="btn btn-outline ml-1">

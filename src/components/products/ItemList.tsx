@@ -1,11 +1,10 @@
-import { useRecoilValue } from "recoil";
 import ProductsList from "./ProductsList";
-import { productsList } from "../../store/products";
 import { Category } from "../../constants/category";
+import useProductsLoadable from "../../CustomHook/useProductsLoadable";
 
 const ItemList = ({ category }: { category: string }) => {
-  const totalList = useRecoilValue(productsList);
-  const categoryList = totalList.filter((IProduct) => {
+  const productsLists = useProductsLoadable();
+  const categoryList = productsLists.filter((IProduct) => {
     return Category[IProduct.category] === category;
   });
 

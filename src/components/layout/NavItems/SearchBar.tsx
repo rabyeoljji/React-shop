@@ -43,6 +43,7 @@ const SearchBar = (): JSX.Element => {
     if (clickActive) {
       setClickActive(false);
       setInvisible(true);
+      setSearchValue("");
     } else {
       setClickActive(true);
       setInvisible(false);

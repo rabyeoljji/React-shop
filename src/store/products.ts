@@ -28,7 +28,12 @@ export const productsList = selector<IProduct[]>({
   key: "productsList",
   get: async () => {
     try {
-      const response = await fetch(productsURL);
+      const response = await fetch(productsURL, {
+        method: "GET",
+        headers: {
+          Accept: "application / json",
+        },
+      });
       return (await response.json()) || [];
     } catch (error) {
       console.log(`Error: \n${error}`);

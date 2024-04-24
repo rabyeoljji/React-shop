@@ -81,7 +81,10 @@ if (!cart || cart[cartID] === undefined) {
 
 ### 배포 단계
 
--
+- 배포 후에
+  Error:
+  SyntaxError: Unexpected token '<', "`<!DOCTYPE `"... is not valid JSON
+  에러 발생
 
 ### 배포 주소
 

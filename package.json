@@ -30,6 +30,7 @@
   "dependencies": {
     "@vercel/node": "^2.15.10",
     "react-responsive": "^10.0.0",
-    "theme-change": "^2.5.0"
+    "theme-change": "^2.5.0",
+    "tree": "^0.1.3"
   }
 }

@@ -51,6 +51,9 @@ const SearchBar = (): JSX.Element => {
   };
   const moveToProductPage = (id: number) => {
     navigate(`/product/${id}`);
+    setClickActive(false);
+    setInvisible(true);
+    setSearchValue("");
   };
   const goSearchList = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const $target = e.target as HTMLElement;

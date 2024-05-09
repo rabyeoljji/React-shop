@@ -13,7 +13,18 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/public/PWA/favicon-16x16.png" />
     <link rel="manifest" href="/manifest.json" />
     <script>
-      navigator.serviceWorker.register("/service-worker.js");
+      if ("ServiceWorker" in navigator) {
+        window.addEventListener("load", function () {
+          navigator.serviceWorker.register("/service-worker.js").then(
+            function (registration) {
+              console.log("ServiceWorker registration successful with scope: ", registration.scope);
+            },
+            function (err) {
+              console.log("ServiceWorker registration failed: ", err);
+            }
+          );
+        });
+      }
     </script>
     <title>React Shop</title>
   </head>

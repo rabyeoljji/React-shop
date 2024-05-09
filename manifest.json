@@ -12,7 +12,7 @@
   "categories": ["lifestyle", "shopping"],
   "screenshots": [
     {
-      "src": "/public/PWA/main_page_mobile.png",
+      "src": "https://react-shop-geunana.vercel.app/public/PWA/main_page_mobile.png",
       "sizes": "287x622",
       "type": "image/png",
       "label": "React Shop의 홈 스크린"
@@ -20,34 +20,34 @@
   ],
   "icons": [
     {
-      "src": "/public/PWA/android-chrome-192x192.png",
+      "src": "https://react-shop-geunana.vercel.app/public/PWA/android-chrome-192x192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/public/PWA/android-chrome-512x512.png",
+      "src": "https://react-shop-geunana.vercel.app/public/PWA/android-chrome-512x512.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "any"
     },
     {
-      "src": "/public/PWA/favicon-16x16.png",
+      "src": "https://react-shop-geunana.vercel.app/public/PWA/favicon-16x16.png",
       "type": "image/png",
       "sizes": "16x16",
       "purpose": "any"
     },
     {
-      "src": "/public/PWA/favicon-32x32.png",
+      "src": "https://react-shop-geunana.vercel.app/public/PWA/favicon-32x32.png",
       "type": "image/png",
       "sizes": "32x32",
       "purpose": "any"
     },
     {
-      "src": "/public/PWA/favicon.ico",
+      "src": "https://react-shop-geunana.vercel.app/public/PWA/favicon.ico",
       "sizes": "48x48"
     },
     {
-      "src": "/public/PWA/apple-touch-icon.png",
+      "src": "https://react-shop-geunana.vercel.app/public/PWA/apple-touch-icon.png",
       "type": "image/png",
       "sizes": "180x180",
       "purpose": "any"

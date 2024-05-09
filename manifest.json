@@ -12,13 +12,18 @@
   "categories": ["lifestyle", "shopping"],
   "screenshots": [
     {
-      "src": "/src/assets/img/PWA/main_page.png",
+      "src": "/src/assets/img/PWA/main_page_mobile.png",
       "sizes": "287x622",
       "type": "image/png",
       "label": "React Shop의 홈 스크린"
     }
   ],
   "icons": [
+    {
+      "src": "/src/assets/img/favicon/icon-128x128.ico",
+      "type": "image/ico",
+      "sizes": "128x128"
+    },
     {
       "src": "/src/assets/img/favicon/icon-48x48.png",
       "type": "image/png",

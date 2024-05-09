@@ -2,7 +2,7 @@
   "name": "React Shop",
   "short_name": "React Shop",
   "description": "간단한 쇼핑 앱, React Shop",
-  "start_url": "/",
+  "start_url": "https://react-shop-geunana.vercel.app/",
   "scope": "/",
   "background_color": "#ffffff",
   "theme_color": "#4a00ff",

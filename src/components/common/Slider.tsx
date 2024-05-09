@@ -48,7 +48,7 @@ const Slider = () => {
     >
       {items.map((item: ISliderItem, index: number) => {
         return (
-          <div key={item.name} className="carousel-slide h-56 sm:h-56 lg:h-2/3">
+          <div key={item.name} className="carousel-slide h-56 sm:h-56 lg:h-2/3 overflow-hidden">
             <div className="carousel-description absolute left-auto right-auto top-1/3 sm:top-1/4 lg:bottom-1/3 mb-10 text-left w-full lg:container px-4 md:px-10">
               <h2 className="text-2xl lg:text-4xl font-bold text-white">{item.title}</h2>
               <p className="my-2 text-white">{item.text}</p>

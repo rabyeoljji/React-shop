@@ -3,7 +3,7 @@
   "short_name": "React Shop",
   "description": "간단한 쇼핑 앱, React Shop",
   "start_url": "https://react-shop-geunana.vercel.app/",
-  "scope": "/",
+  "scope": "https://react-shop-geunana.vercel.app/",
   "background_color": "#ffffff",
   "theme_color": "#4a00ff",
   "dir": "ltr",
@@ -22,8 +22,7 @@
     {
       "src": "/public/PWA/android-chrome-192x192.png",
       "type": "image/png",
-      "sizes": "192x192",
-      "purpose": "maskable"
+      "sizes": "192x192"
     },
     {
       "src": "/public/PWA/android-chrome-512x512.png",

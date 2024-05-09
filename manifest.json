@@ -1,53 +1,52 @@
 {
-	"name": "React Shop",
-	"short_name": "React Shop",
-	"description": "간단한 쇼핑 앱, React Shop",
-	"start_url": "/",
-	"scope": "/",
-	"background_color": "#ffffff",
-	"theme_color": "#4a00ff",
-	"dir": "ltr",
-	"display": "standalone",
-	"orientation": "any",
-	"categories": ["lifestyle", "shopping"],
-	"screenshots": [
-		{
-			"src": "src/assets/img/PWA/main_page.png",
-			"sizes": "287x622",
-			"type": "image/png",
-			"label": "React Shop의 홈 스크린"
-		}
-	],
-	"icons": [
-		{
-			"src": "src/assets/img/favicon/icon-48x48.png",
-			"type": "image/png",
-			"sizes": "48x48"
-		},
-		{
-			"src": "src/assets/img/favicon/icon-192x192.png",
-			"type": "image/png",
-			"sizes": "192x192",
-			"purpose": "any maskable"
-		},
-		{
-			"src": "src/assets/img/favicon/icon-512x512.png",
-			"type": "image/png",
-			"sizes": "512x512",
-			"purpose": "any"
-		},
-		{
-			"src": "src/assets/img/favicon/icon-128x128.png",
-			"type": "image/png",
-			"sizes": "128x128",
-			"purpose": "any"
-		},
+  "name": "React Shop",
+  "short_name": "React Shop",
+  "description": "간단한 쇼핑 앱, React Shop",
+  "start_url": "/",
+  "scope": "/",
+  "background_color": "#ffffff",
+  "theme_color": "#4a00ff",
+  "dir": "ltr",
+  "display": "standalone",
+  "orientation": "any",
+  "categories": ["lifestyle", "shopping"],
+  "screenshots": [
     {
-			"src": "src/assets/img/favicon/mask-icon.svg",
-			"type": "image/svg",
-			"sizes": "64x64",
-			"purpose": "any"
-		}
-	],
-	"shortcuts": []
+      "src": "src/assets/img/PWA/main_page.png",
+      "sizes": "287x622",
+      "type": "image/png",
+      "label": "React Shop의 홈 스크린"
+    }
+  ],
+  "icons": [
+    {
+      "src": "src/assets/img/favicon/icon-48x48.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "src/assets/img/favicon/icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "src/assets/img/favicon/icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "src/assets/img/favicon/icon-128x128.png",
+      "type": "image/png",
+      "sizes": "128x128",
+      "purpose": "any"
+    },
+    {
+      "src": "src/assets/img/favicon/mask-icon.svg",
+      "type": "image/svg",
+      "sizes": "64x64",
+      "purpose": "any"
+    }
+  ]
 }
